@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Code Snippets</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav class="navbar navbar-static-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+            <a class="navbar-brand" href="/snippets/">Code Snippets</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li></li>
+            <form action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
+              <button type="submit" name="logout">Logout</button>
+            </form>
+          </ul>
+        </div>
+
+      </div>
+
+    </nav>
+    <div class="container">
+      <ul>
+        {{#model}}
+        <a href="/snippets/id/{{_id}}">
+        <li>
+          <p>{{username}}</p>
+          <p>{{title}}</p>
+          <p>{{body}}</p>
+          <p>{{language}}</p>
+          {{#tags}}<p>{{.}}</p>{{/tags}}
+          <p>{{notes}}</p>
+        </li>
+        </a>
+        {{/model}}
+      </ul>
+
+    <form action="/snippets/language/" method="GET">
+      <input type="text" name="language" value="" placeholder="Find by Language">
+      <input type="submit" name="submit" value="Find">
+    </form>
+    <form action="/snippets/tags/" method="GET">
+      <input type="text" name="tags" value="" placeholder="Find by Tags">
+      <input type="submit" name="submit" value="Find">
+    </form>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  </body>
+</html>

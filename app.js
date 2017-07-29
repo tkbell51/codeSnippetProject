@@ -18,6 +18,7 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[nodeEnv];
 mongoose.connect(config.mongoURL);
 mongoose.Promise = require('bluebird');
+
 app.engine('mustache', mustacheExpress());
 app.set('view engine', 'mustache');
 app.set('views', './views');
@@ -25,18 +26,6 @@ app.set('views', './views');
 app.use(bodyParser.json());
 app.use((bodyParser.urlencoded({extended: false})));
 
-const user1 = new User({
-  username: 'theQ',
-  password: 123456,
-  firstName: 'quinton'
-})
-user1.save();
-const user2 = new User({
-  username: 'user',
-  password: 'password',
-  firstName: 'nicole'
-})
-user2.save();
 
 passport.use(new BasicStrategy(
   function(username, password, done){
@@ -59,16 +48,20 @@ app.use(expressValidator({
 }));
 
 app.use(session({
-  secret: 'flavor'
-  , resave: false
-  , saveUninitialized: false
+  secret: 'flavor',
+   resave: false,
+  saveUninitialized: false
 }));
 
+app.use(function(req, res, next){
+  var pathname = parseurl(req).pathname;
+  if(!req.session.user && !pathname.includes('/snippets/user/')){
+    res.redirect('/snippets/user/login');
+  } else {
+    next();
+  }
+});
 routes(app);
-
-
-
-
 app.get("/api/sanity", (req, res)=>{
   res.json({hello: "tim"})
 })

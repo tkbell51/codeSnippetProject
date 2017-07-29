@@ -14,29 +14,30 @@ const expect = require('chai').expect;
 //-------Snippet Model Tests-----------//
 describe('snippet model tests', ()=>{
   beforeEach((done)=>{
-      Snippet.deleteMany({}).then(done());
-    });
+    Snippet.deleteMany({}).then(done());
+  });
 
-    afterEach((done)=>{
-      Snippet.deleteMany({}).then(done());
-    });
+  afterEach((done)=>{
+    Snippet.deleteMany({}).then(done());
+  });
 
-    it("test should clean up after itself", (done)=>{
-      const snippet = new Snippet().save().then(newSnippet=>{
-        Snippet.count().then(count=>{
-          expect(count).to.equal(1);
+  it("test should clean up after itself", (done)=>{
+    const snippet = new Snippet().save().then(newSnippet=>{
+      Snippet.count().then(count=>{
+        expect(count).to.equal(1);
 
-        });
       });
-      done();
     });
-it('can create a snippet in the db and find it with mongoose syntax',(done)=>{
-  let snippet = new Snippet({userId: '12345', name:'test snippet', body:'let test = 2 + 2', language: 'Javascript', tags: ['Javascript', 'test'], notes: ['this is a test'] }).save().then(newSnippet =>{
-    expect(newSnippet.name).to.equal('test snippet');
-    expect(newSnippet.notes).to.equal('this is a test');
+    done();
+  });
+
+  it('can create a snippet in the db and find it with mongoose syntax',(done)=>{
+    let snippet = new Snippet({username: 'tim', title:'test snippet', body:'let test = 2 + 2', language: 'Javascript', tags: ['Javascript', 'test'], notes: 'this is a test' }).save().then(newSnippet =>{
+      expect(newSnippet.title).to.equal('test snippet');
+
+    })
+    done();
   })
-  done();
-})
 
 })
 
@@ -48,29 +49,29 @@ describe("user model test", ()=>{
   });
 
   it('will not login if invalid user',(done)=>{
-      login('peanut', 'greenies').then(result=> {
-        expect(result).to.equal(false)
-      })
-      done();
+    login('peanut', 'greenies').then(result=> {
+      expect(result).to.equal(false)
     })
+    done();
+  })
 
   it('will not login if invalid password', (done)=>{
-  createUser('peanut', 'quincy', 'greenies').then(user=>{
-    login('peanut', 'skateboard').then(result=> {
-      expect(result).to.equal(false);
-    })
-  })
-  done();
-})
-
-  it('can login and return true if valid login', (done)=>{
-    createUser('peanut', 'greenies', 'parker').then(user =>{
-      console.log(user);
-      login('peanut', 'greenies').then(result => {
-        expect(result).to.equal(true);
+    createUser('peanut', 'quincy', 'greenies').then(user=>{
+      login('peanut', 'skateboard').then(result=> {
+        expect(result).to.equal(false);
       })
     })
     done();
+  })
+
+  it('can login and return true if valid login', (done)=>{
+    createUser('peanut', 'greenies', 'parker').then(user =>{
+      login('peanut', 'greenies').then(result => {
+        expect(result).to.equal(true);
+        done();
+      })
+    })
+
   })
 
   it('can generate a password object from password string', (done) => {
@@ -86,7 +87,7 @@ describe("user model test", ()=>{
       expect(user.username).to.equal('username');
       expect(user.firstName).to.equal('joe');
       expect(user.password).to.be.an('object');
-      expect(user.password).hash.length.to.equal(344);
+      expect(user.password.hash.length).to.equal(344);
     })
     done();
   })
