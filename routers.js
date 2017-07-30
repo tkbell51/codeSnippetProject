@@ -17,10 +17,14 @@ module.exports = (app) =>{
 
   //snippet endpoint
   snippetRouter.get("/snippets/", snippetController.snippetRender);
-  snippetRouter.post("/snippets/create",  snippetController.snippetPost);
+  snippetRouter.get("/snippets/newSnippet", snippetController.newSnippetRender)
+  snippetRouter.post("/snippets/create",  snippetController.snippetCreate);
   snippetRouter.get("/snippets/id/:_id",  snippetController.oneSnippet);
   snippetRouter.get("/snippets/language/", snippetController.languageSnippet);
   snippetRouter.get("/snippets/tags/", snippetController.tagSnippet);
+  snippetRouter.get("/snippets/username/:username", snippetController.userSnippet)
+  snippetRouter.get("/snippets/yourSnippets/:username", snippetController.sessSnippet);
+  // snippetRouter.post("/snippets/star/:_id", snippetController.snippetStar)
 
   //api snippet endpoint
   apiRouter.get("/api/snippets/all",passport.authenticate('basic', {session: false}),  snippetController.snippetRenderAPI);

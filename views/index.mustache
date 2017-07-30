@@ -1,59 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Code Snippets</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  </head>
-  <body>
-    <nav class="navbar navbar-static-top navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-            <a class="navbar-brand" href="/snippets/">Code Snippets</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li></li>
-            <form action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
-              <button type="submit" name="logout">Logout</button>
-            </form>
-          </ul>
-        </div>
+<head>
+  <meta charset="utf-8">
+  <title>Code Snippets</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles.css">
 
-      </div>
+</head>
+<body>
 
-    </nav>
+  <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
-      <ul>
-        {{#model}}
-        <a href="/snippets/id/{{_id}}">
-        <li>
-          <p>{{username}}</p>
-          <p>{{title}}</p>
-          <p>{{body}}</p>
-          <p>{{language}}</p>
-          {{#tags}}<p>{{.}}</p>{{/tags}}
-          <p>{{notes}}</p>
-        </li>
-        </a>
-        {{/model}}
-      </ul>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/snippets/">Code Snippets</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
 
-    <form action="/snippets/language/" method="GET">
-      <input type="text" name="language" value="" placeholder="Find by Language">
-      <input type="submit" name="submit" value="Find">
-    </form>
-    <form action="/snippets/tags/" method="GET">
-      <input type="text" name="tags" value="" placeholder="Find by Tags">
-      <input type="submit" name="submit" value="Find">
-    </form>
+          <li>
+            <form class="navbar-form " action="/snippets/language/" method="GET">
+              <div class="form-group">
+                <input class="form-control" type="text" name="language" value="" placeholder="Find by Language">
+              </div>
+              <button class="btn btn-default" type="submit" name="button">Search</button>
+            </form>
+          </li>
+          <li>
+            <form class="navbar-form" action="/snippets/tags/" method="GET">
+              <div class="form-group">
+                <input class="form-control" type="text" name="tags" value="" placeholder="Find by Tags">
+
+              </div>
+              <button class="btn btn-default" type="submit" name="button">Search</button>
+            </form>
+          </li>
+          <li>
+            <button class="btn btn-defalut navbar-btn" type="button" name="button"><a href="/snippets/newSnippet">Create Snippet</a></button>
+          </li>
+          <li><a href="/snippets/yourSnippets/{{session}}">@{{session}}</a></li>
+          <li>
+            <form class="navbar-form" action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
+              <button class="btn btn-default" type="submit" name="logout">Logout</button>
+            </form>
+          </li>
+        </ul>
     </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
+  </div>
+</nav>
+
+
+<div class="container-fluid">
+
+  <div class="row">
+    {{#model}}
+    <div class="col-sm-6 col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <p class="panel-title">{{title}} <span class="text-right"> {{language}}</span> </p>
+        </div>
+        <div class="panel-body">
+          <h2>{{body}}</h2>
+
+          <p><a href="/snippets/username/{{username}}">{{username}}</a></p>
+
+            <button class="btn btn-default" type="button" name="button"><a href="/snippets/id/{{_id}}">More Info</a></button>
+
+
+
+        </div>
+      </div>
+    </div>
+    {{/model}}
+  </div>
+
+
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>
+$(document).ready(function () {
+  $('.dropdown-toggle').dropdown();
+});
+</script>
+</body>
 </html>

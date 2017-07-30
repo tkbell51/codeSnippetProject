@@ -8,8 +8,7 @@
 
 </head>
 <body>
-
-  <nav class="navbar navbar-fixed-top navbar-inverse">
+  <nav class="navbar navbar-static-top navbar-inverse">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -54,32 +53,25 @@
   </div>
 </nav>
 
-  <div class=" container page-header">
-
-    <h1>{{filterTitle}}</h1>
-  </div>
-  <div class="container-fluid">
-
-    <div class="row">
-      {{#model}}
-      <div class="col-sm-6 col-md-4">
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <p class="panel-title">{{title}} <span class="text-right">     {{language}}</span> </p>
-          </div>
-          <div class="panel-body">
-            <h2>{{body}}</h2>
-
-            <p><a href="/snippets/username/{{username}}">{{username}}</a></p>
-            <button class="btn btn-default" type="button" name="button"><a href="/snippets/id/{{_id}}">More Info</a></button>
-          </div>
-        </div>
+  <div class="jumbotron">
+    <div class="container">
+      <div class="page-header">
+        <h1>{{filterTitle}}</h1>
       </div>
-      {{/model}}
+
+      <div class="user">
+        {{#model}}
+        <h1><a href="/snippets/username/{{username}}">{{username}}</a></h1>
+        <p><b>Title: </b>{{title}}</p>
+        <p><b>Body: </b>{{body}}</p>
+        <p><b>Language: </b>{{language}}</p>
+        <p><b>Tags: </b>{{tags}}</p>
+        <p><b>Notes: </b>{{notes}}</p>
+        {{/model}}
+      </div>
     </div>
+
   </div>
-
-
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
   $('.dropdown-toggle').dropdown()
   </script>

@@ -1,22 +1,105 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Create Snippet</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  </head>
-  <body>
-    <div class="container">
-      <form>
-        <input type="text" name="title" value="" placeholder="title">
-        <input type="text" name="body" value="" placeholder="snippet">
-        <input type="text" name="language" value="" placeholder="language">
-        <input type="text" name="tag" value="" placeholder="tag">
-        <input type="text" name="notes" value="" placeholder="notes">
-        <input type="submit" name="submit" value="Create Code Snippet!">
-      </form>
-    </div>
+<head>
+  <meta charset="utf-8">
+  <title>Create Snippet</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles.css">
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
+</head>
+<body>
+  <nav class="navbar navbar-static-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/snippets/">Code Snippets</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+
+          <li>
+            <form class="navbar-form " action="/snippets/language/" method="GET">
+              <div class="form-group">
+                <input class="form-control" type="text" name="language" value="" placeholder="Find by Language">
+              </div>
+              <button class="btn btn-default" type="submit" name="button">Search</button>
+            </form>
+          </li>
+          <li>
+            <form class="navbar-form" action="/snippets/tags/" method="GET">
+              <div class="form-group">
+                <input class="form-control" type="text" name="tags" value="" placeholder="Find by Tags">
+
+              </div>
+              <button class="btn btn-default" type="submit" name="button">Search</button>
+            </form>
+          </li>
+          <li>
+            <button class="btn btn-defalut navbar-btn" type="button" name="button"><a href="/snippets/newSnippet">Create Snippet</a></button>
+          </li>
+          <li><a href="/snippets/yourSnippets/{{session}}">@{{session}}</a></li>
+          <li>
+            <form class="navbar-form" action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
+              <button class="btn btn-default" type="submit" name="logout">Logout</button>
+            </form>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+  <div class="container">
+    <form class="form-horizontal sign-up" action="/snippets/create" method="POST">
+      <ul>
+        {{#errors}}
+        <li>{{param}}: {{msg}}</li>
+        {{/errors}}
+      </ul>
+      <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Title</label>
+        <div class="col-sm-10">
+          <input id="title" class="form-control"type="text" name="title" value="" placeholder="Title">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="snippet" class="col-sm-2 control-label">Snippet</label>
+        <div class="col-sm-10">
+          <textarea id="snippet" name="snippet" class="form-control" rows="3" placeholder="Enter code snippet here..." value=""></textarea>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="language" class="col-sm-2 control-label">Language</label>
+        <div class="col-sm-10">
+          <input id="language" class="form-control"type="text" name="language" value="" placeholder="Language">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="notes" class="col-sm-2 control-label">Notes</label>
+        <div class="col-sm-10">
+          <textarea id="notes" name="notes" class="form-control" rows="3" placeholder="Enter notes here..." value=""></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="Tags" class="col-sm-2 control-label">Tags</label>
+        <div class="col-sm-10">
+          <input id="Tags" class="form-control"type="text" name="tags" value="" placeholder="Tags">
+        </div>
+      </div>
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary" name="button">Sign Up</button>
+
+      </div>
+
+    </form>
+  </div>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+$('.dropdown-toggle').dropdown()
+</script>
+</body>
 </html>

@@ -33,39 +33,51 @@ module.exports = {
   },
   //----------View Endpoints
   snippetRender: (req, res) =>{
-    let context = {};
+    const context = {};
+    context.session = req.session.user
     Snippet.find({}).then(snippet=>{
       console.log(snippet);
       context.model = snippet;
       res.render('index', context)
     })
   },
-  snippetPost: (req, res)=>{
-    let context = {};
+  newSnippetRender:(req,res)=>{
+    const context = {};
+    context.session = req.session.user;
+    res.render('newSnippet', context);
+  },
+  snippetCreate: (req, res)=>{
+    let tagsBody = req.body.tags
+    let modelTags = tagsBody.split(' ')
     const snippet = new Snippet({
       username: req.session.user,
       title: req.body.title,
-      body: req.body.body,
+      body: req.body.snippet,
       language: req.body.language,
-      tags: req.body.tags.split(",")
-    }).save().then(snippet=>{
+      tags: modelTags,
+      notes: req.body.notes
+
+    });
+    snippet.save().then(snippet=>{
       res.redirect('/snippets/');
     })
   },
+
+
   oneSnippet: (req,res)=>{
-    let context = {};
+    const context = {};
+    context.session = req.session.user
     let id = req.params._id;
     Snippet.findOne({_id: req.params._id}).then(snippet=>{
       console.log(snippet);
       context.filterTitle = snippet.title
       context.model = snippet
-      res.render('filter', context);
+      res.render('oneSnippet', context);
     })
   },
   languageSnippet: (req,res)=>{
-
-    let context = {};
-
+const context = {};
+context.session = req.session.user
     Snippet.find({language: req.query.language}).then(snippet=>{
       console.log(snippet);
       req.params.language = snippet.language;
@@ -77,11 +89,33 @@ module.exports = {
   },
 
   tagSnippet: (req, res)=>{
-    let context = {};
+    const context = {};
+    context.session = req.session.user
     Snippet.find({tags: {$in: [req.query.tags]}}).then(snippet=>{
       console.log(snippet);
       context.filterTitle = req.query.tags
       context.model = snippet
+      res.render('filter', context);
+    })
+  },
+  userSnippet:(req,res)=>{
+    const context = {};
+    context.session = req.session.user
+    Snippet.find({username: req.params.username}).then(snippet=>{
+      console.log(snippet);
+      context.filterTitle = snippet.username;
+      context.model = snippet;
+      res.render('filter', context);
+    })
+  },
+  sessSnippet:(req,res)=>{
+    const context = {};
+    context.session = req.session.user
+    Snippet.find({username: req.params.username}).then(snippet=>{
+      
+      console.log(snippet);
+      context.filterTitle = snippet.username;
+      context.model = snippet;
       res.render('filter', context);
     })
   }

@@ -1,28 +1,62 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-      <link rel="stylesheet" href="../styles.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="login">
-        <h1>Login</h1>
-        <p>{{message}}</p>
-        <form class="sign-up" action="/snippets/user/login" method="post">
+<head>
+  <meta charset="utf-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
 
 
-           <input type="text" name="username" placeholder="Username">
-           <input type="password" name="password" placeholder="Password">
+  <nav class="navbar navbar-static-top navbar-inverse">
 
-           <input type="submit" name="submit" value="Log In">
-         </form>
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/snippets/">Code Snippets</a>
       </div>
-      <a href="/snippets/user/signup">Sign Up</a>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+
+        </ul>
+      </div>
+
     </div>
 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  </body>
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Login</h1>
+      <div class="login">
+
+        <p>{{message}}</p>
+        <form class="form-inline" action="/snippets/user/login" method="post">
+          <div class="form-group">
+            <input class="form-control" type="text" name="username" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input class="form-control" type="password" name="password" placeholder="Password">
+          </div>
+          <button class="btn btn-default" type="submit" name="button">Log In</button>
+        </form>
+      </div>
+      <button class="btn btn-primary"type="button" name="button"><a class="signup" href="/snippets/user/signup">Sign Up</a></button>
+
+    </div>
+
+
+  </div>
+
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+  $('.dropdown-toggle').dropdown()
+  </script>
+</body>
 </html>
