@@ -8,7 +8,7 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-static-top navbar-inverse">
+    <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -71,9 +71,14 @@
     </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-      $('.dropdown-toggle').dropdown()
+
+
+    <script>
+    $(document).ready(function () {
+      $('.dropdown-toggle').dropdown();
+    });
     </script>
   </body>
 </html>

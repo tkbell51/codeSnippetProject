@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-fixed-top navbar-inverse">
+  <nav class="navbar navbar-inverse">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -43,12 +43,18 @@
           <li>
             <button class="btn btn-defalut navbar-btn" type="button" name="button"><a href="/snippets/newSnippet">Create Snippet</a></button>
           </li>
-          <li><a href="/snippets/yourSnippets/{{session}}">@{{session}}</a></li>
-          <li>
-            <form class="navbar-form" action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
-              <button class="btn btn-default" type="submit" name="logout">Logout</button>
-            </form>
-          </li>
+          <!-- Dropdown menu -->
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">  @{{session}} <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/snippets/yourSnippets/{{session}}">Your Snippets</a></li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <form class="navbar-form" action="/snippets/user/logout" method="POST" class="navvar-from navbar-right" >
+                <button class="btn btn-default" type="submit" name="logout">Logout</button>
+              </form>
+            </li>
+            <!-- End Dropdown Menu -->
         </ul>
     </div>
   </div>
@@ -80,8 +86,14 @@
   </div>
 
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
-  $('.dropdown-toggle').dropdown()
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+  <script>
+  $(document).ready(function () {
+    $('.dropdown-toggle').dropdown();
+  });
   </script>
 </body>
 </html>
